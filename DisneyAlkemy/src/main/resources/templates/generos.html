@@ -1,0 +1,50 @@
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <link href="/genero.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="centro">
+
+
+            <h3>GENERO</h3>
+
+
+            <form action="/genero/form" method="POST">
+                <div class="mb-3">
+                    <label for="genero" class="form-label">INGRESA UN NUEVO GENERO</label>
+                    <input autocomplete="off" type="text" class="form-control"  name="genero" placeholder="Genero">
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+
+        </div>  
+
+        <h3>GENEROS</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" genero : ${generos}">
+                    <td th:text="${genero.nombre}">Genero</td>
+                    <td><a th:href="@{/genero/editar/} + ${genero.id}" class="btn btn-warning">Editar</a></td>
+                    <td><a th:href="@{/genero/eliminar/} + ${genero.id}" class="btn btn-danger">X</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </body>
+</html>

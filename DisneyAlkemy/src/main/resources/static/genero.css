@@ -1,0 +1,38 @@
+body{
+    background-image: url(https://i.pinimg.com/originals/fa/08/b8/fa08b8026027018dd369e08f764d5f83.jpg);
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+}
+h3{
+    color:white;
+}
+form{
+    color: white;
+    border: 3px solid white;
+    padding: 15px;
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    flex-direction: column;
+}
+input{
+    width: 300px;
+}
+button{
+    margin-top: 5px;
+}
+.centro{
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    flex-direction: column;
+
+}
+.table{
+    color: white;
+    background: #0B2168;
+    width: 20%;
+    opacity: .8;
+}
