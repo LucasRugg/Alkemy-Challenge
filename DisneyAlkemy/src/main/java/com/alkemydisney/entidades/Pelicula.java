@@ -1,6 +1,7 @@
 package com.alkemydisney.entidades;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class Pelicula {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-  
+
     private String id;
     private String titulo;
     @Temporal(TemporalType.DATE)
@@ -27,6 +28,15 @@ public class Pelicula {
     private byte[] imagen;
     @OneToOne
     private Genero genero;
+    private List<Personaje> personajes;
+
+    public List<Personaje> getPersonajes() {
+        return personajes;
+    }
+
+    public void setPersonajes(List<Personaje> personajes) {
+        this.personajes = personajes;
+    }
 
     public Genero getGenero() {
         return genero;
@@ -35,8 +45,6 @@ public class Pelicula {
     public void setGenero(Genero genero) {
         this.genero = genero;
     }
-
-    
 
     public byte[] getImagen() {
         return imagen;
@@ -85,8 +93,5 @@ public class Pelicula {
     public void setAlta(Boolean alta) {
         this.alta = alta;
     }
-
-   
- 
 
 }

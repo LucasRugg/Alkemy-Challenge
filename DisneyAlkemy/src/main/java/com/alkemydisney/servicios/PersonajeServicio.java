@@ -19,7 +19,7 @@ public class PersonajeServicio {
     private PersonajeRepositorio personajeRepositorio;
 
     @Transactional(rollbackFor = {Exception.class})
-    public void crear(String nombre, Integer edad, Integer peso, String historia, MultipartFile imagen) throws IOException {
+    public void crear(String nombre, Integer edad, Integer peso, String historia, MultipartFile imagen, List<Pelicula>peliculas) throws IOException {
         Personaje personaje = new Personaje();
         personaje.setNombre(nombre);
         personaje.setEdad(edad);
@@ -27,6 +27,7 @@ public class PersonajeServicio {
         personaje.setImagen(imagen.getBytes());
         personaje.setPeso(peso);
         personaje.setAlta(true);
+        personaje.setPeliculas(peliculas);
 
         personajeRepositorio.save(personaje);
     }
@@ -52,6 +53,7 @@ public class PersonajeServicio {
         personaje.setHistoria(historia);
         personaje.setImagen(imagen.getBytes());
         personaje.setPeso(peso);
+ 
 
         return personajeRepositorio.save(personaje);
     }

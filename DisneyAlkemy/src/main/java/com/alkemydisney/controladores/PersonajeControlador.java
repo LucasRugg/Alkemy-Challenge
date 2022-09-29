@@ -1,5 +1,6 @@
 package com.alkemydisney.controladores;
 
+import com.alkemydisney.entidades.Pelicula;
 import com.alkemydisney.entidades.Personaje;
 import com.alkemydisney.servicios.PersonajeServicio;
 import java.io.IOException;
@@ -30,8 +31,8 @@ public class PersonajeControlador {
     }
 
     @PostMapping("/crear")
-    public String crear(@RequestParam String nombre, @RequestParam Integer edad, @RequestParam Integer peso, @RequestParam String historia, @RequestParam MultipartFile imagen) throws IOException {
-        personajeServicio.crear(nombre, edad, peso, historia, imagen);
+    public String crear(@RequestParam String nombre, @RequestParam Integer edad, @RequestParam Integer peso, @RequestParam String historia, @RequestParam MultipartFile imagen, @RequestParam List<Pelicula>peliculas) throws IOException {
+        personajeServicio.crear(nombre, edad, peso, historia, imagen,peliculas);
         return "";
     }
 

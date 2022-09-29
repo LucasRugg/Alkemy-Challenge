@@ -3,6 +3,7 @@ package com.alkemydisney.controladores;
 import com.alkemydisney.entidades.Pelicula;
 import com.alkemydisney.entidades.Personaje;
 import com.alkemydisney.servicios.PeliculaServicio;
+import com.alkemydisney.servicios.PersonajeServicio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,9 @@ public class PeliculaControlador {
 
     @Autowired
     private PeliculaServicio pelicualServicio;
+    
+    @Autowired
+    private PersonajeServicio personajeServicio;
 
     @GetMapping("/lista")
     public String listar(ModelMap modelo) {
@@ -43,8 +47,8 @@ public class PeliculaControlador {
     }
 
     @PostMapping("/editar")
-    public String editar(@RequestParam String titulo, @RequestParam Date fechaDeCreacion, @RequestParam Integer calificacion) throws Exception {
-        pelicualServicio.editar(titulo, titulo, fechaDeCreacion, calificacion);
+    public String editar(@RequestParam String titulo, @RequestParam List<Personaje> personajes, @RequestParam Date fechaDeCreacion, @RequestParam Integer calificacion) throws Exception {
+        pelicualServicio.editar(titulo, titulo, fechaDeCreacion, calificacion, personajes);
         return "";
 
     }
@@ -54,6 +58,30 @@ public class PeliculaControlador {
         pelicualServicio.darBaja(id);
         return "";
 
+    }
+
+    @GetMapping("/detalle/{id}")
+    public String detalle(@PathVariable String id, ModelMap modelo) {
+        try {
+            Pelicula pelicula = pelicualServicio.buscarPorId(id);
+            modelo.put("pelicula", pelicula);
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "error";
+
+        }
+        return "";
+    }
+    
+    @PostMapping("/{idPelicula}/personaje/{idPersonaje}")
+    public String agregarPersonaje(@PathVariable String idPelicula,@PathVariable String idPersonaje) throws Exception{
+        Pelicula pelicula = pelicualServicio.buscarPorId(idPelicula);
+        Personaje personaje = personajeServicio.buscarPorId(idPersonaje);
+        List<Personaje> pers = pelicula.getPersonajes();
+        pers.add(personaje);
+        pelicula.setPersonajes(pers);
+        return "";
+        
     }
 
 }

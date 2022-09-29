@@ -1,6 +1,7 @@
 package com.alkemydisney.servicios;
 
 import com.alkemydisney.entidades.Genero;
+import com.alkemydisney.entidades.Pelicula;
 import com.alkemydisney.repositorios.GeneroRepositorio;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,11 +19,12 @@ public class GeneroServicio {
     private GeneroRepositorio generoRepositorio;
 
     @Transactional(rollbackFor = {Exception.class})
-    public void crear(String nombre) throws IOException {
+    public void crear(String nombre, List<Pelicula>peliculas) throws IOException {
 
         Genero genero = new Genero();
 
         genero.setNombre(nombre);
+        genero.setPeliculas(peliculas);
         genero.setAlta(true);
 
         generoRepositorio.save(genero);
@@ -63,9 +65,10 @@ public class GeneroServicio {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public Genero editar(String id, String nombre) {
+    public Genero editar(String id, String nombre, List<Pelicula>peliculas) {
         Genero genero = buscarPorId(id);
         genero.setNombre(nombre);
+        genero.setPeliculas(peliculas);
         generoRepositorio.save(genero);
         return genero;
 

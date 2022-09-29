@@ -1,14 +1,15 @@
-
 package com.alkemydisney.entidades;
 
-
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Personaje {
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -18,6 +19,8 @@ public class Personaje {
     private Integer peso;
     private String historia;
     private byte[] imagen;
+    @OneToOne
+    private List<Pelicula> peliculas;
     private Boolean alta;
 
     public String getId() {
@@ -60,7 +63,13 @@ public class Personaje {
         this.historia = historia;
     }
 
-    
+    public List<Pelicula> getPeliculas() {
+        return peliculas;
+    }
+
+    public void setPeliculas(List<Pelicula> peliculas) {
+        this.peliculas = peliculas;
+    }
 
     public byte[] getImagen() {
         return imagen;
@@ -78,8 +87,4 @@ public class Personaje {
         this.alta = alta;
     }
 
- 
-
 }
-    
-

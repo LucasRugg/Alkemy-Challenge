@@ -1,5 +1,6 @@
+package com.alkemydisney.entidades;
 
-package com.alkemydisney.entidades;import java.util.List;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ public class Genero {
     private String id;
     private String nombre;
     private Boolean alta;
+    private List<Pelicula> peliculas;
 
     public Boolean getAlta() {
         return alta;
@@ -23,11 +25,14 @@ public class Genero {
         this.alta = alta;
     }
 
-    
+    public List<Pelicula> getPeliculas() {
+        return peliculas;
+    }
 
-    
-    
-    
+    public void setPeliculas(List<Pelicula> peliculas) {
+        this.peliculas = peliculas;
+    }
+
     public String getId() {
         return id;
     }
@@ -44,10 +49,4 @@ public class Genero {
         this.nombre = nombre;
     }
 
-    
-
-   
 }
-
-    
-

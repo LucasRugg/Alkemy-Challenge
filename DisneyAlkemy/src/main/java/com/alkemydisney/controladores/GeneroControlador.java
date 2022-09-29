@@ -1,6 +1,7 @@
 package com.alkemydisney.controladores;
 
 import com.alkemydisney.entidades.Genero;
+import com.alkemydisney.entidades.Pelicula;
 import com.alkemydisney.servicios.GeneroServicio;
 import java.io.IOException;
 import java.util.HashSet;
@@ -32,9 +33,9 @@ public class GeneroControlador {
     }
 
     @PostMapping("/crear")
-    public String crear(@RequestParam String genero, ModelMap modelo) throws IOException {
+    public String crear(@RequestParam String genero,@RequestParam List<Pelicula>peliculas, ModelMap modelo) throws IOException {
 
-        generoServicio.crear(genero);
+        generoServicio.crear(genero,peliculas);
 
         return "";
 
@@ -56,9 +57,9 @@ public class GeneroControlador {
     }
 
     @PostMapping("/editar")
-    public String editar(@RequestParam String id, @RequestParam String nombre) {
+    public String editar(@RequestParam String id, @RequestParam List<Pelicula>peliculas,@RequestParam String nombre) {
         try {
-            generoServicio.editar(id, nombre);
+            generoServicio.editar(id, nombre,peliculas);
 
         } catch (Exception e) {
         }
