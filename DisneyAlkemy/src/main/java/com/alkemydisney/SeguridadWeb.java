@@ -4,7 +4,6 @@ package com.alkemydisney;
 import com.alkemydisney.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +29,23 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter{
     
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests().antMatchers("/css/*","/js/*","/img/*", "/*").permitAll();
+        http.authorizeRequests()
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/css/*","/js/*","/img/*", "/*")
+                .permitAll()
+        .and().formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/auth/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/inicio")
+                .permitAll()
+        .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll()
+        .and().csrf()
+                .disable();
         
     }
     
